@@ -1,3 +1,9 @@
+/* Factory512 Unified Design System — VolunteerHub (Violet)
+ *
+ * All Factory512 apps share this base. Per-app accent color is the only override.
+ * Uses oklch for perceptual uniformity. Tailwind v4 syntax.
+ */
+
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -5,136 +11,101 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  /* ─── Base Palette ──────────────────────────────────── */
+  --color-background: oklch(0.145 0.014 260);
+  --color-foreground: oklch(0.93 0.006 260);
+
+  /* ─── Cards & Surfaces ─────────────────────────────── */
+  --color-card: oklch(0.178 0.014 260);
+  --color-card-foreground: oklch(0.93 0.006 260);
+  --color-popover: oklch(0.178 0.014 260);
+  --color-popover-foreground: oklch(0.93 0.006 260);
+
+  /* ─── Primary — Violet ──────────────────────────────── */
+  --color-primary: oklch(0.62 0.18 270);
+  --color-primary-foreground: oklch(0.98 0.005 260);
+
+  /* ─── Secondary ────────────────────────────────────── */
+  --color-secondary: oklch(0.22 0.014 260);
+  --color-secondary-foreground: oklch(0.88 0.006 260);
+
+  /* ─── Muted ────────────────────────────────────────── */
+  --color-muted: oklch(0.21 0.012 260);
+  --color-muted-foreground: oklch(0.60 0.01 260);
+
+  /* ─── Accent ───────────────────────────────────────── */
+  --color-accent: oklch(0.22 0.014 260);
+  --color-accent-foreground: oklch(0.93 0.006 260);
+
+  /* ─── Destructive ──────────────────────────────────── */
+  --color-destructive: oklch(0.55 0.2 25);
+  --color-destructive-foreground: oklch(0.98 0.005 25);
+
+  /* ─── Borders & Inputs ─────────────────────────────── */
+  --color-border: oklch(0.26 0.012 260);
+  --color-input: oklch(0.26 0.012 260);
+  --color-ring: oklch(0.62 0.18 270);
+
+  /* ─── Sidebar ──────────────────────────────────────── */
+  --color-sidebar: oklch(0.16 0.014 260);
+  --color-sidebar-foreground: oklch(0.88 0.006 260);
+  --color-sidebar-primary: oklch(0.62 0.18 270);
+  --color-sidebar-primary-foreground: oklch(0.98 0.005 260);
+  --color-sidebar-accent: oklch(0.22 0.018 260);
+  --color-sidebar-accent-foreground: oklch(0.93 0.006 260);
+  --color-sidebar-border: oklch(0.24 0.012 260);
+  --color-sidebar-ring: oklch(0.62 0.18 270);
+
+  /* ─── Chart Colors ─────────────────────────────────── */
+  --color-chart-1: oklch(0.65 0.18 250);
+  --color-chart-2: oklch(0.70 0.16 160);
+  --color-chart-3: oklch(0.72 0.15 85);
+  --color-chart-4: oklch(0.60 0.20 25);
+  --color-chart-5: oklch(0.65 0.18 310);
+
+  /* ─── Semantic Status Colors ───────────────────────── */
+  --color-success: oklch(0.65 0.17 150);
+  --color-success-foreground: oklch(0.98 0.005 150);
+  --color-warning: oklch(0.75 0.15 85);
+  --color-warning-foreground: oklch(0.20 0.02 85);
+  --color-info: oklch(0.65 0.15 240);
+  --color-info-foreground: oklch(0.98 0.005 240);
+
+  /* ─── Radius ───────────────────────────────────────── */
+  --radius: 0.625rem;
+
+  /* ─── Fonts ────────────────────────────────────────── */
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace, monospace;
-  --font-heading: var(--font-sans);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
-:root {
-  --background: 220 14% 96%;
-  --foreground: 220 40% 10%;
-  --card: 0 0% 100%;
-  --card-foreground: 220 40% 10%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 220 40% 10%;
-  --primary: 280 60% 50%;
-  --primary-foreground: oklch(1 0 0);
-  --secondary: 220 14% 90%;
-  --secondary-foreground: 220 40% 10%;
-  --muted: 220 14% 92%;
-  --muted-foreground: 220 10% 45%;
-  --accent: 220 14% 90%;
-  --accent-foreground: 220 40% 10%;
-  --destructive: 0 70% 50%;
-  --border: 220 14% 92%;
-  --input: 220 14% 92%;
-  --ring: 280 60% 50%;
-  --chart-1: 280 60% 50%;
-  --chart-2: oklch(0.573 0.107 172.5);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.5rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: 220 10% 90%;
-  --sidebar-primary: 280 60% 50%;
-  --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 220 40% 15%;
-  --sidebar-accent-foreground: 0 0% 100%;
-  --sidebar-border: 220 40% 12%;
-  --sidebar-ring: 280 60% 50%;
-}
-
-.dark {
-  --background: 220 14% 96%;
-  --foreground: 220 40% 10%;
-  --card: 0 0% 100%;
-  --card-foreground: 220 40% 10%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 220 40% 10%;
-  --primary: 280 60% 50%;
-  --primary-foreground: oklch(1 0 0);
-  --secondary: 220 14% 90%;
-  --secondary-foreground: 220 40% 10%;
-  --muted: 220 14% 92%;
-  --muted-foreground: 220 10% 45%;
-  --accent: 220 14% 90%;
-  --accent-foreground: 220 40% 10%;
-  --destructive: 0 70% 50%;
-  --border: 220 14% 92%;
-  --input: 220 14% 92%;
-  --ring: 280 60% 50%;
-  --chart-1: 280 60% 50%;
-  --chart-2: oklch(0.573 0.107 172.5);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: 220 10% 90%;
-  --sidebar-primary: 280 60% 50%;
-  --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 220 40% 15%;
-  --sidebar-accent-foreground: 0 0% 100%;
-  --sidebar-border: 220 40% 12%;
-  --sidebar-ring: 280 60% 50%;
-}
+/* ─── Base Styles ──────────────────────────────────────── */
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
-  }
-  html {
-    @apply font-sans;
+    @apply bg-background text-foreground antialiased;
   }
 }
 
-/* Elegant SaaS Refinements */
-.card, [data-sidebar="sidebar"] {
-  border: none !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.02) !important;
-  background-color: hsl(0 0% 100%) !important;
-}
-table th, table td {
-  border-bottom: 1px solid hsl(var(--border)) !important;
+/* ─── Status Badge Utilities ───────────────────────────── */
+
+@layer components {
+  .badge-success {
+    @apply bg-success/15 text-success border-success/25;
+  }
+  .badge-warning {
+    @apply bg-warning/15 text-warning border-warning/25;
+  }
+  .badge-destructive {
+    @apply bg-destructive/15 text-destructive border-destructive/25;
+  }
+  .badge-info {
+    @apply bg-info/15 text-info border-info/25;
+  }
+  .badge-muted {
+    @apply bg-muted text-muted-foreground border-border;
+  }
 }
