@@ -13,6 +13,7 @@ import type * as dashboard from "../dashboard.js";
 import type * as hourLogs from "../hourLogs.js";
 import type * as notifications from "../notifications.js";
 import type * as opportunities from "../opportunities.js";
+import type * as qaHelper from "../qaHelper.js";
 import type * as seed from "../seed.js";
 import type * as shifts from "../shifts.js";
 import type * as signUps from "../signUps.js";
@@ -32,6 +33,7 @@ declare const fullApi: ApiFromModules<{
   hourLogs: typeof hourLogs;
   notifications: typeof notifications;
   opportunities: typeof opportunities;
+  qaHelper: typeof qaHelper;
   seed: typeof seed;
   shifts: typeof shifts;
   signUps: typeof signUps;

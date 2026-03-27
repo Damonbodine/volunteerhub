@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 
 export default function TeamsPage() {
   const user = useQuery(api.users.getCurrentUser);
-  const teams = useQuery(api.teams.list);
+  const teams = useQuery(api.teams.list, user === undefined ? "skip" : {});
 
   return (
     <div className="space-y-6">

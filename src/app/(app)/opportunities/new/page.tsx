@@ -18,7 +18,8 @@ import { cn } from "@/lib/utils";
 function NewOpportunityForm() {
   const router = useRouter();
   const createOpportunity = useMutation(api.opportunities.create);
-  const coordinators = useQuery(api.users.listCoordinators);
+  const user = useQuery(api.users.getCurrentUser);
+  const coordinators = useQuery(api.users.listCoordinators, user === undefined ? "skip" : {});
 
   const [form, setForm] = useState({
     title: "",
