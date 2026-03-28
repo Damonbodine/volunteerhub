@@ -3,6 +3,7 @@ export const dynamic = 'force-dynamic';
 import { useQuery } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { buttonVariants } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -12,10 +13,12 @@ import { MapPin, Calendar, Users, Plus } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { ShiftRecommender } from "@/components/shift-recommender";
+import { withPreservedDemoQuery } from "@/lib/demo";
 
 export default function OpportunitiesPage() {
   const [categoryFilter, setCategoryFilter] = useState<string>("all");
   const [statusFilter, setStatusFilter] = useState<string>("all");
+  const searchParams = useSearchParams();
 
   const user = useQuery(api.users.getCurrentUser);
   const opportunities = useQuery(api.opportunities.list, {
@@ -24,14 +27,14 @@ export default function OpportunitiesPage() {
   });
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" data-demo="opportunities-list">
       <div className="flex items-center justify-between gap-4 flex-wrap">
         <div>
           <h1 className="text-2xl font-bold text-foreground">Opportunities</h1>
           <p className="text-muted-foreground mt-1">Find and sign up for volunteer opportunities.</p>
         </div>
         {(user?.role === "Admin" || user?.role === "Coordinator") && (
-          <Link href="/opportunities/new" className={cn(buttonVariants({ variant: "default" }), "bg-primary hover:bg-primary/90")}>
+          <Link href={withPreservedDemoQuery("/opportunities/new", searchParams)} className={cn(buttonVariants({ variant: "default" }), "bg-primary hover:bg-primary/90")}>
             <Plus className="h-4 w-4 mr-2" />
             New Opportunity
           </Link>
@@ -85,7 +88,7 @@ export default function OpportunitiesPage() {
           {opportunities.map((opp) => {
             const spotsPercent = opp.spotsTotal > 0 ? (opp.spotsFilled / opp.spotsTotal) * 100 : 0;
             return (
-              <Link key={opp._id} href={`/opportunities/${opp._id}`} className="block group">
+              <Link key={opp._id} href={withPreservedDemoQuery(`/opportunities/${opp._id}`, searchParams)} className="block group">
                 <Card className="h-full transition-shadow hover:shadow-md border-border">
                   <CardHeader className="pb-3">
                     <div className="flex items-start justify-between gap-2">

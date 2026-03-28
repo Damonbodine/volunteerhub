@@ -109,3 +109,12 @@
     @apply bg-muted text-muted-foreground border-border;
   }
 }
+
+[data-demo-active="true"] {
+  position: relative;
+  border-radius: calc(var(--radius) + 6px);
+  box-shadow:
+    0 0 0 2px color-mix(in oklch, var(--color-primary) 70%, transparent),
+    0 0 0 8px rgb(20 184 166 / 0.16),
+    0 18px 50px rgb(15 118 110 / 0.18);
+}

@@ -29,12 +29,14 @@ import {
   FileText,
 } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
+import { withPreservedDemoQuery } from "@/lib/demo";
 
 export function AppSidebar() {
   const user = useQuery(api.users.getCurrentUser);
   const unreadCount = useQuery(api.notifications.getUnreadCount);
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const role = user?.role;
 
@@ -96,7 +98,7 @@ export function AppSidebar() {
                   <SidebarMenuItem key={item.href}>
                     <SidebarMenuButton
                       isActive={pathname === item.href}
-                      render={<Link href={item.href} />}
+                      render={<Link href={withPreservedDemoQuery(item.href, searchParams)} />}
                     >
                       <item.icon className="h-4 w-4" />
                       <span>{item.title}</span>
@@ -116,7 +118,7 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.href}>
                   <SidebarMenuButton
                     isActive={pathname === item.href || pathname.startsWith(item.href + "/")}
-                    render={<Link href={item.href} />}
+                    render={<Link href={withPreservedDemoQuery(item.href, searchParams)} />}
                   >
                     <item.icon className="h-4 w-4" />
                     <span>{item.title}</span>

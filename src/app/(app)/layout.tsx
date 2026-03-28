@@ -1,6 +1,7 @@
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import { Separator } from "@/components/ui/separator";
+import { DemoMode } from "@/components/demo-mode";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -12,6 +13,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           <Separator orientation="vertical" className="mr-2 h-4" />
         </header>
         <main className="flex-1 p-6">{children}</main>
+        <DemoMode />
       </SidebarInset>
     </SidebarProvider>
   );

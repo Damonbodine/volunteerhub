@@ -3,6 +3,7 @@ export const dynamic = 'force-dynamic';
 import { useQuery, useMutation } from "convex/react";
 import { api } from "../../../../../convex/_generated/api";
 import { use } from "react";
+import { useSearchParams } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -12,10 +13,12 @@ import { MapPin, Calendar, Users, Edit, Plus, Clock } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Id } from "../../../../../convex/_generated/dataModel";
+import { withPreservedDemoQuery } from "@/lib/demo";
 
 export default function OpportunityDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const opportunityId = id as Id<"opportunities">;
+  const searchParams = useSearchParams();
 
   const user = useQuery(api.users.getCurrentUser);
   const opportunity = useQuery(api.opportunities.getById, { id: opportunityId });
@@ -48,7 +51,7 @@ export default function OpportunityDetailPage({ params }: { params: Promise<{ id
   const isAdminOrCoordinator = user?.role === "Admin" || user?.role === "Coordinator";
 
   return (
-    <div className="space-y-6 max-w-4xl">
+    <div className="space-y-6 max-w-4xl" data-demo="opportunity-detail">
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
           <div className="flex items-center gap-3 flex-wrap">
@@ -61,11 +64,11 @@ export default function OpportunityDetailPage({ params }: { params: Promise<{ id
         </div>
         {isAdminOrCoordinator && (
           <div className="flex gap-2">
-            <Link href={`/opportunities/${id}/edit`} className={cn(buttonVariants({ variant: "outline", size: "sm" }))}>
+            <Link href={withPreservedDemoQuery(`/opportunities/${id}/edit`, searchParams)} className={cn(buttonVariants({ variant: "outline", size: "sm" }))}>
               <Edit className="h-4 w-4 mr-2" />
               Edit
             </Link>
-            <Link href={`/opportunities/${id}/shifts/new`} className={cn(buttonVariants({ variant: "outline", size: "sm" }))}>
+            <Link href={withPreservedDemoQuery(`/opportunities/${id}/shifts/new`, searchParams)} className={cn(buttonVariants({ variant: "outline", size: "sm" }))}>
               <Plus className="h-4 w-4 mr-2" />
               Add Shift
             </Link>

@@ -42,7 +42,7 @@ function ReviewHoursContent() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" data-demo="review-hours">
       <div>
         <h1 className="text-2xl font-bold text-foreground">Review Hours</h1>
         <p className="text-muted-foreground mt-1">Approve or reject volunteer hour submissions.</p>
