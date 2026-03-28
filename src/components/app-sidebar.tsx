@@ -26,6 +26,7 @@ import {
   ClipboardCheck,
   UsersRound,
   Search,
+  FileText,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -42,6 +43,7 @@ export function AppSidebar() {
     { title: "Users", href: "/users", icon: Users },
     { title: "Teams", href: "/teams", icon: UsersRound },
     { title: "Review Hours", href: "/review-hours", icon: ClipboardCheck },
+    { title: "Impact Report", href: "/admin/impact-report", icon: FileText },
   ];
 
   const coordinatorItems = [

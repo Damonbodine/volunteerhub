@@ -10,6 +10,7 @@ import { Calendar, Clock, MapPin } from "lucide-react";
 import Link from "next/link";
 import { Id } from "../../../../convex/_generated/dataModel";
 import { cn } from "@/lib/utils";
+import { ThankYouGenerator } from "@/components/thank-you-generator";
 
 export default function MyShiftsPage() {
   const signUps = useQuery(api.signUps.mySignUps);
@@ -118,7 +119,10 @@ export default function MyShiftsPage() {
                       </div>
                     </div>
                     {s.status === "Completed" && (
-                      <Link href={`/my-hours/log?shiftId=${s.shiftId}`} className={cn(buttonVariants({ size: "sm" }), "bg-secondary hover:bg-secondary/90")}>Log Hours</Link>
+                      <div className="flex items-center gap-2">
+                        <ThankYouGenerator shiftId={s.shiftId} />
+                        <Link href={`/my-hours/log?shiftId=${s.shiftId}`} className={cn(buttonVariants({ size: "sm" }), "bg-secondary hover:bg-secondary/90")}>Log Hours</Link>
+                      </div>
                     )}
                   </div>
                 </CardContent>

@@ -11,6 +11,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { MapPin, Calendar, Users, Plus } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { ShiftRecommender } from "@/components/shift-recommender";
 
 export default function OpportunitiesPage() {
   const [categoryFilter, setCategoryFilter] = useState<string>("all");
@@ -65,6 +66,8 @@ export default function OpportunitiesPage() {
           </SelectContent>
         </Select>
       </div>
+
+      <ShiftRecommender />
 
       {opportunities === undefined ? (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

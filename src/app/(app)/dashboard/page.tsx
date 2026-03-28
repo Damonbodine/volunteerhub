@@ -6,6 +6,11 @@ import { StatCard } from "@/components/stat-card";
 import { RoleGuard } from "@/components/role-guard";
 import { Clock, Users, Search, Calendar } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { EngagementRiskDetector } from "@/components/engagement-risk-detector";
+import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { FileText } from "lucide-react";
 
 function DashboardContent() {
   const stats = useQuery(api.dashboard.adminStats);
@@ -22,9 +27,15 @@ function DashboardContent() {
 
   return (
     <div className="space-y-8">
-      <div>
-        <h1 className="text-2xl font-bold text-foreground">Admin Dashboard</h1>
-        <p className="text-muted-foreground mt-1">Overview of volunteer activity across the platform.</p>
+      <div className="flex items-center justify-between gap-4 flex-wrap">
+        <div>
+          <h1 className="text-2xl font-bold text-foreground">Admin Dashboard</h1>
+          <p className="text-muted-foreground mt-1">Overview of volunteer activity across the platform.</p>
+        </div>
+        <Link href="/admin/impact-report" className={cn(buttonVariants({ variant: "outline" }))}>
+          <FileText className="h-4 w-4 mr-2" />
+          Impact Report
+        </Link>
       </div>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -53,6 +64,8 @@ function DashboardContent() {
           tintColor="teal"
         />
       </div>
+
+      <EngagementRiskDetector />
     </div>
   );
 }
