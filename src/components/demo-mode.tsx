@@ -21,6 +21,7 @@ type DemoStep = {
   whyItMatters: string;
   routePrefix: string;
   target?: string;
+  actionTarget?: string;
   actionLabel?: string;
 };
 
@@ -90,6 +91,7 @@ const VOLUNTEERHUB_SCENARIO: DemoScenario = {
         "This shows the system can support concrete staffing and sign-up decisions, not just a list of events.",
       routePrefix: "/opportunities/",
       target: "[data-demo='opportunity-detail']",
+      actionTarget: "[data-demo='primary-opportunity-link']",
     },
     {
       id: "review-hours",
@@ -200,6 +202,14 @@ export function DemoMode() {
 
   function nextStep() {
     if (!onExpectedRoute) {
+      const actionElement = activeStep.actionTarget
+        ? document.querySelector<HTMLElement>(activeStep.actionTarget)
+        : null;
+      if (actionElement) {
+        actionElement.click();
+        return;
+      }
+
       const params = new URLSearchParams(searchParams.toString());
       params.set("demo", activeScenario.id);
       params.set("step", String(stepIndex + 1));
@@ -210,9 +220,12 @@ export function DemoMode() {
       return;
     }
 
-    if (!isLastStep) {
-      setStepIndex((prev) => prev + 1);
+    if (isLastStep) {
+      exitDemo();
+      return;
     }
+
+    setStepIndex((prev) => prev + 1);
   }
 
   function previousStep() {

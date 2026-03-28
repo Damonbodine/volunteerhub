@@ -85,10 +85,15 @@ export default function OpportunitiesPage() {
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {opportunities.map((opp) => {
+          {opportunities.map((opp, index) => {
             const spotsPercent = opp.spotsTotal > 0 ? (opp.spotsFilled / opp.spotsTotal) * 100 : 0;
             return (
-              <Link key={opp._id} href={withPreservedDemoQuery(`/opportunities/${opp._id}`, searchParams)} className="block group">
+              <Link
+                key={opp._id}
+                href={withPreservedDemoQuery(`/opportunities/${opp._id}`, searchParams)}
+                className="block group"
+                data-demo={index === 0 ? "primary-opportunity-link" : undefined}
+              >
                 <Card className="h-full transition-shadow hover:shadow-md border-border">
                   <CardHeader className="pb-3">
                     <div className="flex items-start justify-between gap-2">
